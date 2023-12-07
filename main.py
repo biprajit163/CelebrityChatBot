@@ -5,29 +5,14 @@ import sys
 try:
   openai.api_key = os.environ['OPENAI_API_KEY']
 except KeyError:
-  sys.stderr.write("""
-  You haven't set up your API key yet.
-  
-  If you don't have an API key yet, visit:
-  
-  https://platform.openai.com/signup
-
-  1. Make an account or sign in
-  2. Click "View API Keys" from the top right menu.
-  3. Click "Create new secret key"
-
-  Then, open the Secrets Tool and add OPENAI_API_KEY as a secret.
-  """)
+  sys.stderr.write("Your OpenAI api key is not set up correctly, check Secrets tab to make sure you have set up your key correctly")
   exit(1)
 
 response = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Who won the world series in 2020?"},
-        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-        {"role": "user", "content": "Where was it played?"}
+        {"role": "user", "content": "Who won the world cup in 2018"}
     ]
 )
 
-print(response)
+print(response['choices'][0]['message']['content'])
