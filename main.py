@@ -21,7 +21,8 @@ sys_msg = input("What type of chatbot would you like to create?\n")
 messages.append({"role": "system", "content": f"{sys_msg} in 100 words or less"})
 print("Your new assistant is ready to chat!") 
 
-while input != "quit()":
+message = ""
+while message != "quit":
     message = input("user input: ")
     messages.append({"role": "user", "content": message})
     response = openai.ChatCompletion.create(
@@ -29,9 +30,9 @@ while input != "quit()":
         max_tokens=150,
         messages=messages
     )
-    reply = response["choices"][0]["message"]["content"]
-    messages.append({"role": "assistant"})
-    reply_token_num = token_num(reply, "gpt-3.5-turbo")
+    gpt_reply = response["choices"][0]["message"]["content"]
+    messages.append({"role": "assistant", "content": gpt_reply})
+    reply_token_num = token_num(gpt_reply, "gpt-3.5-turbo")
     
-    print("\n" + reply + "\n")
+    print("\n" + gpt_reply + "\n")
     print(f"token usage: {reply_token_num}")
