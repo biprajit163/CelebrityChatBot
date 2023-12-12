@@ -1,0 +1,1 @@
+**A simple chatbot created using python and OpenAI API. It makes use of the chat completion functionality and lets the user give an input on what type of personality they would want the assistant messages to have. After that the user can ask the gpt any questions they like and the chatbot will respond with the personality type set by the user**
